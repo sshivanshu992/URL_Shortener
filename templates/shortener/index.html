@@ -1,0 +1,106 @@
+{% extends 'shortener/base.html' %}
+{% block title %}URL Shortener{% endblock title %}
+{% block content %}
+
+<section class="mobile header text-center text-black" id="top">
+    <div class="container mobile-size py-5 text-black">
+        <header class="pt-5 my-lg-5">
+           <h1 class="display-4 font-weight-bold">Short links, Perfect Link</h1>
+            <p class="h4 mb-1">A URL shortener generate short link.</p>
+            <p class="font-italic h4">Tool by
+                <a class="text-black text-decoration-none" href="https://github.com/sshivanshu992" target="_blank">
+                    <u>sshivanshu992</u>
+                </a>
+            </p>
+        </header>
+    </div>
+</section>
+
+<!-- Shortener section 1 -->
+<section class="d-flex align-items-center bg-light py-4" id="short_url">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+
+                <form action="" method="POST"> {% csrf_token %}
+                    <div class="form-row ">
+                        <div class="form-group col-lg-8">
+                            {{form}}
+                        </div>
+                        <div class="form-group col-lg-4 ml-auto">
+                            <button type="submit"
+                                class="btn btn-primary btn-block font-weight-bolder y-height">Shorten</button>
+                        </div>
+                    </div>
+                </form>
+                
+                {% if shortenlink %}
+                    <div class="card p-0">
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <div class="row my-auto ">
+                                    <div class="col-lg-6">
+                                        <li class="d-inline">
+                                            <span class="d-inline-block text-truncate d-max-width">
+                                               {{inputurl}}
+                                              </span>
+                                        </li>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <li class="d-inline">
+                                            <span class="d-inline-block text-truncate d-max-width float-lg-right " >
+                                                <a href="{{domain}}{{shortenlink}}" 
+                                                    target="_blank" rel="noopener noreferrer" 
+                                                    class="text-decoration-none" id="copytextarea">
+                                                    {{domain}}{{shortenlink}}
+                                                </a> 
+                                            </span>
+                                        </li>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <li class="d-inline">
+                                            <span>
+                                                <button type="button" id="copyTextBtn" 
+                                                 class="btn btn-light btn-block shorten-link" 
+                                                 data-link={{domain}}{{shortenlink}}
+                                                 ng-click="levelOU()"
+                                                 >Copy</button>
+                                            </span>
+                                        </li>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+
+                        <div class="card-body" style="background: #edf2fe;">
+                            This is some text within a card body.
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- gallery section 2-->
+<section class="py-5 d-flex align-items-center bg-dark" id="gallery">
+    {% include "shortener/gallery.html" %}
+</section>
+
+<!-- contact section 3 -->
+<section class="py-5 d-flex align-items-center" style="background-color: rgb(69, 76, 83);" id="contact">
+    {% include "shortener/contact.html" %}
+</section>
+
+<!-- about section 4 -->
+<section class="py-5" style="background-color: rgb(105, 113, 121);" id="about">
+    {% include "shortener/about.html" %}
+</section>
+
+<footer class="bg-light pb-3 pt-3 ">
+  <div class="container text-center">
+    <p class="font-italic text-muted mb-0">&copy; Copyrights No rights reserved.</p>
+  </div>
+</footer>
+{% endblock content %}
